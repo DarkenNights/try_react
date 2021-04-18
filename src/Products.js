@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ProductInfos from './ProductInfos';
+import ProductsService from './services/productsService';
 
 function Products() {
   useEffect(() => {
@@ -10,11 +11,11 @@ function Products() {
 
   const fetchProducts = async () => {
     try {
-      const data = await fetch('http://localhost:4000/fr/products');
-      const products = await data.json();
-      setProducts(products);
+      const products = await ProductsService.getAll();
+      console.log(products);
+      setProducts(products.data);
     } catch (err) {
-      console.log(err); // Failed to fetch
+      console.log(err.response); // Failed to fetch
     }
   };
 

@@ -1,27 +1,29 @@
+import './ProductsAdd.css';
 import { useState } from 'react';
+import ProductsService from './services/productsService';
 
-function ProductsAdd() {
+function ProductsAdd({ history }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name,
-        description,
-        image,
-      }),
+    const newProduct = {
+      name,
+      description,
+      image,
     };
-    const product = await fetch(
-      'http://api.popcollection:4000/fr/products/add',
-      requestOptions
-    );
-    const response = await product.json();
-    console.log(response);
+    try {
+      const response = await ProductsService.add(newProduct);
+      if (response.status === 201) {
+        history.push('/products');
+      }
+    } catch (error) {
+      console.log(error.response.data);
+      setError(error.response.data);
+    }
   };
 
   const handleChangeName = (event) => {
@@ -39,6 +41,7 @@ function ProductsAdd() {
   return (
     <div>
       <h1>Vous êtes sur la page d'ajout d'un produit</h1>
+      {error && <div className="productsAdd-form-error">{error}</div>}
       <form>
         <input
           type="text"

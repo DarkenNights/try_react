@@ -4,7 +4,8 @@ import Nav from './Nav';
 import Home from './Home';
 import Products from './Products';
 import ProductsAdd from './ProductsAdd';
-import Login from "./Login";
+import Login from './Login';
+import Register from './Register';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/products/add" component={ProductsAdd} />
             <Route path="/products/modify" component={ProductsAdd} />
             <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
           </Switch>
         </div>
       </Router>

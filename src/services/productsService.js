@@ -1,0 +1,32 @@
+import axios from 'axios';
+import authHeader from './authHeader';
+
+const BASE_URL = 'http://localhost:4000/fr/products/';
+
+class ProductsService {
+  async getAll() {
+    const Authorization = authHeader();
+    return axios({
+      method: 'GET',
+      url: BASE_URL,
+      headers: {
+        Authorization,
+      },
+    });
+  }
+
+  async add(product) {
+    const Authorization = authHeader();
+    return axios({
+      method: 'POST',
+      url: BASE_URL + 'add',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization,
+      },
+      data: product,
+    });
+  }
+}
+
+export default new ProductsService();

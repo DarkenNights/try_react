@@ -1,31 +1,48 @@
-import axios from "axios"
+import axios from 'axios';
 
-const BASE_URL = "http://localhost:4000/fr/user/"
+const BASE_URL = 'http://localhost:4000/fr/user/';
 
 class AuthService {
-
-  login(email, password)
-  {
-    return axios({
-      method: 'post',
-      url: BASE_URL + "login",
+  async login(email, password) {
+    const response = await axios({
+      method: 'POST',
+      url: BASE_URL + 'login',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
       data: {
-        email: email,
-        password: password
-      }
-    }).then(response => {
-      if(response.data.token) {
-        localStorage.setItem("user", JSON.stringify(response.data))
-      }
-      return response.data
-    }).catch((error) => {
-      console.log(error)
+        email,
+        password,
+      },
+    });
+    if (response.status === 200 && response.data.token) {
+      localStorage.setItem('user', JSON.stringify(response.data));
+    }
+    return response;
+  }
+
+  async register(name, email, password) {
+    return axios({
+      method: 'POST',
+      url: BASE_URL + 'register',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        name,
+        email,
+        password,
+      },
     });
   }
 
+  logout() {
+    localStorage.removeItem('user');
+  }
+
+  getCurrentUser() {
+    return JSON.parse(localStorage.getItem('user'));
+  }
 }
 
 export default new AuthService();
