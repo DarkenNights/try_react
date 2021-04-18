@@ -17,7 +17,7 @@ function ProductsAdd() {
       }),
     };
     const product = await fetch(
-      'http://api.popcollection:3000/fr/products/add',
+      'http://api.popcollection:4000/fr/products/add',
       requestOptions
     );
     const response = await product.json();

@@ -10,9 +10,8 @@ function Products() {
 
   const fetchProducts = async () => {
     try {
-      const data = await fetch('http://localhost:3000/fr/products');
+      const data = await fetch('http://localhost:4000/fr/products');
       const products = await data.json();
-      console.log(products);
       setProducts(products);
     } catch (err) {
       console.log(err); // Failed to fetch
