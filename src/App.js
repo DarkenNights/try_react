@@ -6,6 +6,7 @@ import Products from './Products';
 import ProductsAdd from './ProductsAdd';
 import Login from './Login';
 import Register from './Register';
+import UploadImageToS3WithNativeSdk from './UploadImageToS3WithNativeSdk';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/products/modify" component={ProductsAdd} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/upload" component={UploadImageToS3WithNativeSdk} />
           </Switch>
         </div>
       </Router>
