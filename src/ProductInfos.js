@@ -1,9 +1,12 @@
-function ProductInfos({ product }) {
+function ProductInfos({ product, handleDelete }) {
   return (
-    <div>
-      <h2>{product.name}</h2>
+    <>
+      <h2>
+        {product.name} <button onClick={() => handleDelete(product)}>X</button>{' '}
+      </h2>
       <p>{product.description}</p>
-    </div>
+      <img src={product.image} alt={product.name} />
+    </>
   );
 }
 

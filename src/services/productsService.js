@@ -27,6 +27,21 @@ class ProductsService {
       data: product,
     });
   }
+
+  async delete(name) {
+    const Authorization = authHeader();
+    return axios({
+      method: 'POST',
+      url: BASE_URL + 'delete',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization,
+      },
+      data: {
+        name,
+      },
+    });
+  }
 }
 
 export default new ProductsService();
